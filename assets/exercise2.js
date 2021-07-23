@@ -16,12 +16,13 @@
             data.push(object);
         }
 
-        let chart = new dimple.chart(svg, data);
+        let chart3 = new dimple.chart(svg, data);
 
-        chart.addCategoryAxis("x", "X");
-        chart.addMeasureAxis("y", "Y");
-        chart.addSeries(null, dimple.plot.line);
-        chart.draw();
+        chart3.addCategoryAxis("x", "X");
+        chart3.addMeasureAxis("y", "Y");
+        chart3.addSeries(null, dimple.plot.line);
+        chart3.draw();
+        // chart.update();
 
         // function updateGraph(){
         //     originalData = JSON.parse(request.responseText);
