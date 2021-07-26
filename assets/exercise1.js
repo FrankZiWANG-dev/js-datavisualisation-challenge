@@ -1,3 +1,4 @@
+//TABLE 1 ///////////////////////////////////////////
 let table1 = document.getElementById("table1");
 
 //create array with years
@@ -70,14 +71,14 @@ for (let y=2; y<=12;y++){
 let svg = dimple.newSvg("h3", 800, 600);
 let chart = new dimple.chart(svg, data1);
 
-let colors = []
+// let colors = []
 
-for (let v=0; v<=36;v++){
-    color='rgb('+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+')';
-    colors.push(color);
-}
+// for (let v=0; v<=36;v++){
+//     color='rgb('+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+')';
+//     colors.push(color);
+// }
 
-        let x = chart.addCategoryAxis("x", "0", colors[3]);
+        let x = chart.addCategoryAxis("x", "0");
         let y1= chart.addMeasureAxis("y","1");
         let y2= chart.addMeasureAxis("y","2");
         let y3= chart.addMeasureAxis("y","3");
@@ -150,9 +151,43 @@ for (let v=0; v<=36;v++){
         chart.addSeries(null, dimple.plot.line, [x, y35]);
         chart.addSeries(null, dimple.plot.line, [x, y36]);
 
-        chart.draw();
-       
-        document.querySelector("#table1 caption").insertAdjacentHTML("afterend", "<noscript> Your browser doesn't support Javascript </noscript>");
-        // noscript = document.createElement("noscript");
-        // noscript.innerHTML = "Your browser doesn't support Javascript";
-        // body.appendChild(noscript);
+chart.draw();
+    
+document.querySelector("#table1 caption").insertAdjacentHTML("afterend", "<noscript> Your browser doesn't support Javascript </noscript>");
+
+
+//TABLE 2 //////////////////////////////////////////////////
+let table2 = document.getElementById("table2");
+
+let svg2 = dimple.newSvg("#Homicides", 800, 600);
+let data2 = [];
+
+//data from table2 30 pays fois 2
+let prisonTime1= table2.rows[0].cells[2].innerHTML;
+let prisonTime2= table2.rows[0].cells[3].innerHTML;
+
+//loop through every countryn creating two objects by country (one for each year)
+for (let y=1; y<=30;y++){
+    //prisoners by country in 2007
+    prisonYear1 = new Object();
+    prisonYear1.Year = prisonTime1;
+    prisonYear1.Country = table2.rows[y].cells[1].innerHTML;
+    prisonYear1.Prison = table2.rows[y].cells[2].innerHTML;
+    data2.push(prisonYear1);
+
+    //prisoners by country in 2010
+    prisonYear2 = new Object();
+    prisonYear2.Year = prisonTime2;
+    prisonYear2.Country = table2.rows[y].cells[1].innerHTML;
+    prisonYear2.Prison = table2.rows[y].cells[3].innerHTML;
+    data2.push(prisonYear2);
+
+}
+
+let chart2 = new dimple.chart(svg2, data2);
+chart2.addCategoryAxis("x", ["Year", "Country"]);
+chart2.addMeasureAxis("y", "Prison");
+chart2.addSeries(null, dimple.plot.bar);
+chart2.draw();
+
+document.querySelector("#table2 caption").insertAdjacentHTML("afterend", "<noscript> Your browser doesn't support Javascript </noscript>");
