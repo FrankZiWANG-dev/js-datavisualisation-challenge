@@ -2,19 +2,18 @@ window.onload = () => {
     let svg = dimple.newSvg("#firstHeading", 800, 600);       
            
     function updateGraph(){
+        
+        fetch('https://canvasjs.com/services/data/datapoints.php', {cache: 'no-cache'})
+        .then(response => response.json())
+        .then(response => {
 
-        let request = new XMLHttpRequest;
-        request.open('GET', 'https://canvasjs.com/services/data/datapoints.php');
-        request.onload = function(){
-
-            let originalData = JSON.parse(request.responseText);
-            let data= new Array();
+            let data= [];
             
 
-            for (x=0;x<originalData.length;x++){
+            for (x=0;x<response.length;x++){
                 let object = new Object();
-                object.X = originalData[x][0];
-                object.Y = originalData[x][1];
+                object.X = response[x][0];
+                object.Y = response[x][1];
                 data.push(object);
             }
 
@@ -29,9 +28,7 @@ window.onload = () => {
                 chart3.svg.selectAll('*').remove();
                 updateGraph();
             },1000);
-        }
-        
-        request.send();
+        })
 
     }
 
